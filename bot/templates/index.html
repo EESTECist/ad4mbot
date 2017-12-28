@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Baba</title>
+  </head>
+  <body>
+    {% for message in messages %}
+      {% if message.is_bot %}
+        <div class="row">
+          <div style="background-color: gray;" class="col-md-6">
+            <h4>{{ message.body }}</h4>
+            <small>By: Bot</small>
+          </div>
+        </div>
+        {% else %}
+        <div class="row">
+          <div class="col-md-6 offset-md-6">
+            <h4>{{ message.body }}</h4>
+            <small>By: User</small>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+    <br><br><br>
+    <div class="col-md-6 offset-md-6">
+      <form style="float: left;" action="say" method="post">
+        {% csrf_token %}
+        Message: <input type="text" name="message">
+        <input type="submit" value="Submit">
+      </form>
+      <form style="" action="clear" method="delete">
+        {% csrf_token %}
+        <input type="submit" value="Clear">
+      </form>
+    </div>
+  </body>
+</html>
